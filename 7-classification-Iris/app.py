@@ -28,4 +28,34 @@ def user_input_features():
     features = pd.DataFrame(data, index=[0])
     return features
 
+# Store User Input into a DataFrame
 df = user_input_features()
+
+# Display Features DataFrame
+st.subheader('User Input Parameters')
+st.write(df)
+
+# Fetch Iris Dataset - Set Data and Target
+iris = datasets.load_iris()
+params = iris.data
+target = iris.target
+
+# Init Random Forest Classifier
+classifier = RandomForestClassifier()
+classifier.fit(params, target)
+
+# Predict Output with Probability
+pred = classifier.predict(df)
+pred_prob = classifier.predict_proba(df)
+
+#Display Target Names
+st.subheader('Class labels and their corresponding index number')
+st.write(iris.target_names)
+
+# Display Target Name for Prediction
+st.subheader('Prediction')
+st.write(iris.target_names[pred])
+
+# Display Prediction Probability
+st.subheader('Prediction Probability')
+st.write(pred_prob)
