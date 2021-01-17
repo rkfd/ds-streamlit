@@ -28,6 +28,7 @@ def load_data(year):
     playerstats = raw.drop(['Rk'], axis=1)
     return playerstats
 
+# Display Unfiltered Data
 playerstats = load_data(selected_year)
 playerstats
 
@@ -41,3 +42,15 @@ selected_pos = st.sidebar.multiselect('Position',unique_pos,unique_pos)
 
 # Filter Data
 df_selected_team = playerstats[(playerstats.Tm.isin(selected_team)) & (playerstats.Pos.isin(selected_pos))]
+
+# Display Filtered DataFrame
+st.header('Display Player Stats of Selected Team(s)')
+st.write('Data Dimension: ' + str(df_selected_team.shape[0]) + ' rows and ' + str(df_selected_team.shape[1] + ' columns.'))
+st.dataframe(df_selected_team)
+
+# Download Stats Data as CSV
+def filedownload(df):
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()
+    href = f'<a href="data:file/csv;base64,{b64}" download="playerstats.csv">Download CSV File</a>'
+    return href
