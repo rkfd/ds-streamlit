@@ -28,3 +28,6 @@ def load_data(year):
 
 playerstats = load_data(selected_year)
 playerstats
+
+sorted_unique_team = sorted(playerstats.Tm.unique())
+selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team)
