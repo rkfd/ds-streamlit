@@ -85,7 +85,11 @@ df = load_data()
 
 # Sidebar - Cryptocurrency Selection
 sorted_coin = sorted(df['coin_symbol'].unique())
-selected_coin = col.multiselect('Cryptocurrency', sorted_coin, sorted_coin)
+selected_coin = col1.multiselect('Cryptocurrency', sorted_coin, sorted_coin)
 
 # Filter by Cryptocurrency
 df_selected_coin = df[(df['coin_symbol'].isin(selected_coin))]
+
+# Sidebar - Number of Coins to Display
+num_coin = col1.slider('Display Top N Coins', 1, 100, 100)
+df_coins = df_selected_coin[:num_coin]
