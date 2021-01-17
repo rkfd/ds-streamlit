@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 '''
     File name: app.py
-    Author: Satwk Gawand
+    Author: Satwik Gawand
     Date Created: 18/1/2021
     Date Last Modified: 18/1/2021
     Python Version: 3.8.6
@@ -67,3 +67,11 @@ for col in encode:
     df = pd.concat([df,dummy], axis=1)
     del df[col]
 df = df[:1]
+
+# Display User Input Features
+st.subheader('User Input Features')
+if uploaded_file is not None:
+    st.write(df)
+else:
+    st.write('Awaiting CSV file to be uploaded. Currently using input parameters (shown below).')
+    st.write(df)
