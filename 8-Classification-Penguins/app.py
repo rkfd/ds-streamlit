@@ -54,3 +54,16 @@ else:
         return features
     
     input_df = user_input_features()
+
+# Combine User Input with Dataset
+penguins_raw = pd.read_csv('penguins_cleaned.csv')
+penguins = penguins_raw.drop(columns=['species'])
+df = pd.concat([input_df, penguins], axis=0)
+
+# Encoding Ordinal Features
+encode = ['sex', 'island']
+for col in encode:
+    dummy = pd.get_dummies(df[col], prefix=col)
+    df = pd.concat([df,dummy], axis=1)
+    del df[col]
+df = df[:1]
