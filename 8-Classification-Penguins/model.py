@@ -31,7 +31,7 @@ target_mapper = {'Adelie':0, 'Chinstrap':1, 'Gentoo':2}
 def target_encode(val):
     return target_mapper[val]
 
-def['species'] = df['species'].apply(target_encode)
+df['species'] = df['species'].apply(target_encode)
 
 # Separate params and target
 x = df.drop('species', axis=1)
