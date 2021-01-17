@@ -82,3 +82,10 @@ def load_data():
     return df
 
 df = load_data()
+
+# Sidebar - Cryptocurrency Selection
+sorted_coin = sorted(df['coin_symbol'].unique())
+selected_coin = col.multiselect('Cryptocurrency', sorted_coin, sorted_coin)
+
+# Filter by Cryptocurrency
+df_selected_coin = df[(df['coin_symbol'].isin(selected_coin))]
