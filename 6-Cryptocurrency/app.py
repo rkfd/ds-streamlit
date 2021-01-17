@@ -93,3 +93,11 @@ df_selected_coin = df[(df['coin_symbol'].isin(selected_coin))]
 # Sidebar - Number of Coins to Display
 num_coin = col1.slider('Display Top N Coins', 1, 100, 100)
 df_coins = df_selected_coin[:num_coin]
+
+# Sidebar - Percent Change Timeframe
+percent_timeframe = col1.selectbox('Percent Change Time Frame', ['7d', '24h', '1h'])
+percent_dict = {"7d":'percent_change_7d',"24h":'percent_change_24h', "1h":'percent_change_1h'}
+selected_percent_timeframe = percent_dict[percent_timeframe]
+
+# Sidebar - Sorting Values
+sort_values = col1.selectbox('Sort Values?',['Yes', 'No'])
