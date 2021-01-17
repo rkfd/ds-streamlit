@@ -37,7 +37,7 @@ if uploaded_file is not None:
 else:
     def user_input_features():
         island = st.sidebar.selectbox('Island', ('Biscoe', 'Dream', 'Torgersen'))
-        sex = st.sidebar.selectbox('Sex', ('Male', 'Female'))
+        sex = st.sidebar.selectbox('Sex', ('male', 'female'))
         bill_length_mm = st.sidebar.slider('Bill Length (mm)', 32.1,59.6, 43.9)
         bill_depth_mm = st.sidebar.slider('Bill Depth (mm)', 13.1, 21.5,17.2)
         flipper_length_mm = st.sidebar.slider('Flipper Length (mm)', 172.0, 231.0, 201.0)
@@ -75,3 +75,18 @@ if uploaded_file is not None:
 else:
     st.write('Awaiting CSV file to be uploaded. Currently using input parameters (shown below).')
     st.write(df)
+
+# Load Model
+load_classifier = pickle.load(open('penguins_classifier.pkl', 'rb'))
+
+# Prediction
+pred = load_classifier.predict(df)
+pred_prob = load_classifier.predict_proba(df)
+
+# Display Prediction
+st.subheader('Prediction')
+penguins_species = np.array(['Adelie', 'Chinstrap', 'Gentoo'])
+st.write(penguins_species[pred])
+
+st.subheader('Prediction Probability')
+st.write(pred_prob)
