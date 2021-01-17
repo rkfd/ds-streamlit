@@ -24,3 +24,17 @@ def load_data():
     html = pd.read_html(url, header=0)
     df = html[0]
     return df
+
+df = load_data()
+sector = df.groupby('GICS Sector')
+
+# Sidebar - Sector Selection
+sorted_sector_unique = sorted(df['GICS Sector'].unique())
+selected_sector = st.sidebar.multiselect('Sector', sorted_sector_unique, sorted_sector_unique)
+
+# Filtering Data
+df_selected_sector = df [(df['GICS Sector'].isin(selected_sector))]
+
+st.header('Display Companies in Selected Sector')
+st.write('Data Dimension: ' + str(df_selected_sector.shape[0]) + ' rows and ' + str(df_selected_sector.shape[1]) + ' columns.')
+st.dataframe(df_selected_sector)
