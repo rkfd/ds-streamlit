@@ -31,7 +31,7 @@ st.sidebar.markdown("""
 """)
 
 # Collect User Input into a DataFrame
-uploaded_file = st.sidebar.file__upload("Upload Your Input CSV File", type=["csv"])
+uploaded_file = st.sidebar.file_uploader("Upload Your Input CSV File", type=["csv"])
 if uploaded_file is not None:
     input_df = pd.read_csv(uploaded_file)
 else:
